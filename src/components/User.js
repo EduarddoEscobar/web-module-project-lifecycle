@@ -19,7 +19,7 @@ class User extends React.Component {
                 <div className="user-card">
                     <img src={this.props.user.avatar_url} alt="Avatar of the user"/>
                     <div className="user-info">
-                        <h2>{this.props.user.name}</h2>
+                        <h2 className="name">{this.props.user.name}</h2>
                         <p>({this.props.user.login})</p>
                         <h3>TOTAL REPOS: {this.props.user.public_repos}</h3>
                         <h3>TOTAL FOLLOWERS: {this.props.user.followers}</h3>
