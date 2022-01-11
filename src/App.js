@@ -47,7 +47,7 @@ class App extends React.Component {
     return(
     <div>
       <User user={this.state.user} handleGetUser={this.handleGetUser} />
-      <FollowerList followers={this.state.followers} />
+      <FollowerList followers={this.state.followers} handleGetUser={this.handleGetUser}/>
     </div>);
   }
 }
