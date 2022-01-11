@@ -6,12 +6,26 @@ class User extends React.Component {
         input: ""
     }
 
+    handleChange = (event) => {
+        const {value} = event.target;
+        this.setState({
+            ...this.state,
+            input: value
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('something happened');
+        this.props.handleGetUser(this.state.input);
+    }
+
     render(){
         return(
-         <div>
+         <div className="user">
             <h1>Github Card</h1>
-            <form>
-                <input type="text" className="handle-input" placeholder="Github Handle"/>
+            <form onSubmit={this.handleSubmit}>
+                <input type="text" className="handle-input" placeholder="Github Handle" onChange={this.handleChange}/>
                 <button>Search</button>
             </form>
             {this.props.user && 

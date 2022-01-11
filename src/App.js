@@ -7,6 +7,7 @@ import './index.css';
 class App extends React.Component {
 
   state = {
+    username: 'eduarddoescobar',
     user: {},
     followers: [],
   }
@@ -14,18 +15,17 @@ class App extends React.Component {
   handleGetUser = (handle) => {
     axios.get(`https://api.github.com/users/${handle}`)
       .then(res => {
-        console.log(res);
         this.setState({
           ...this.state,
-          user: res.data
+          user: res.data,
+          username: handle
         });
       }).catch(err => console.error(err));
   }
 
   handleGetFollowers = () => {
-    axios.get(`https://api.github.com/users/${this.state.user.login}/followers`)
+    axios.get(`https://api.github.com/users/${this.state.username}/followers`)
       .then(res => {
-        console.log(res);
         this.setState({
           ...this.state,
           followers: res.data
@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.handleGetUser('eduarddoescobar');
+    this.handleGetUser(this.state.username);
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -46,7 +46,7 @@ class App extends React.Component {
   render() {
     return(
     <div>
-      <User user={this.state.user} />
+      <User user={this.state.user} handleGetUser={this.handleGetUser} />
       <FollowerList followers={this.state.followers} />
     </div>);
   }
